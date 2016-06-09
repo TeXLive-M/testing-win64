@@ -1,0 +1,45 @@
+               How to install 64bit binaries for TeX Live on Windows
+
+
+In the following, $INSTALLDIR is $SELFAUTOPARENT in the TeX Live,
+that is, the parent directory of "texmf-dist".
+
+(1) Expand the file tl-win64.zip in $INSTALLDIR,
+
+(2) After expanding tl-win64.zip in $INSTALLDIR,
+    change related command PATH from
+    $INSTALLDIR\bin\win32
+    to
+    $INSTALLDIR\bin\win64;$INSTALLDIR\bin\win32
+
+    Note that the following 32bit binaries in $INSTALLDIR\bin\win32
+    are still used on WOW64:
+
+    jbig2.exe       xindy-lisp.exe  xindy.mem       unzip.exe   zip.exe
+    gzip.exe        gunzip.exe
+
+    bitmap2eps.exe  biber.exe       dviout.exe      psv.exe
+    texdoctk.exe    texworks.exe    tlmgr-gui.exe.
+
+    Moreover, tlmgr.bat does not exist in $INSTALLDIR\bin\win64 due to an
+    obvious reason.
+
+    Thus $INSTALLDIR\bin\win32 is necessary "after" $INSTALLDIR\bin\win64.
+
+    If there are problems in 64bit binaries, it is easy to recover
+    the original TeX Live win32, by changing back the PATH:
+    $INSTALLDIR\bin\win64;$INSTALLDIR\bin\win32 --->
+    $INSTALLDIR\bin\win32
+
+(3) Ghostscript is assumed to be 64bit. Therefore users should install
+    64bit Ghostscript and set the command PATH for the Ghostscript.
+    However, don't define TEXLIVE_WINDOWS_EXTERNAL_GS in texmf.cnf,
+    because the preinstalled 32bit Ghostscript is also used in several cases.
+
+    The 64bit binaries are made with the latest sources. Therefore several
+    TeX engines may not be compatible with the present TeX Live. Thus users
+    should run the command
+    fmtutil-sys --all
+
+-- 
+Akira Kakuto
